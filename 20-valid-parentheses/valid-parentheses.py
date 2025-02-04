@@ -1,18 +1,10 @@
 class Solution:
     def isValid(self, s: str) -> bool:
+        valid_brack = [('{', '}'), ('(', ')'), ('[', ']')]
         stack = []
-        for i in s:
-            print(i)
-            if i == '(' or i == '{' or i == '[':
-                stack.append(i)
-            elif len(stack) == 0:
-                return False
-            elif i == ')' and stack[-1] == '(':
-                stack.pop()
-            elif i == '}' and stack[-1] == '{':
-                stack.pop()
-            elif i == ']' and stack[-1] == '[':
+        for c in s:
+            if len(stack)>0 and (stack[-1], c) in valid_brack:
                 stack.pop()
             else:
-                return False
-        return len(stack) == 0
+                stack.append(c)
+        return len(stack)==0
